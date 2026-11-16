@@ -2,7 +2,7 @@
 
 复旦大学智能信息处理课程项目，组号 **2-2**。在 Food-101 六类子集和 Imagenette 320px 上，使用全局颜色特征和局部特征分别完成分类。每套数据使用相同的官方划分和统一的评估口径，对照两种特征的结果。
 
-**提交截止** 2026 年 12 月 2 日 23:59（北京时间）。**课堂汇报** 2026 年 12 月 3 日。同学分别汇报各自模块的代码、函数原理和实验结果。
+**提交截止** 2026 年 12 月 2 日 23:59（北京时间）。组 2-2 的课堂汇报安排在 PJ4。
 
 ## 数据与实验协议
 
@@ -20,9 +20,10 @@ python3.12 -m venv .venv
 source .venv/bin/activate
 python -m pip install -r code/requirements.txt
 python code/setup_data.py "/存放两个课程数据压缩包的目录"
+python code/prepare_splits.py
 ```
 
-成功后生成 `code/data/raw/food-101-coursework-6classes/` 和 `code/data/raw/imagenette2-320/`。脚本会先校验两个包。后续入口由各章负责人实现，并在交接时补上运行参数和软件版本。
+成功后生成 `code/data/raw/food-101-coursework-6classes/` 和 `code/data/raw/imagenette2-320/`。原图压缩包及解包目录保存在各成员本地。数据准备脚本先校验压缩包，再解包到约定路径。第 1 章的已核对清单、类别映射和审计结果位于 `code/results/data_audit/`。后续模块各自提供复现命令。
 
 两条实验路线分别使用 **HSV 全图颜色直方图 → LinearSVC** 和 **SIFT 局部描述子 → K-means 视觉词袋（BoVW）→ LinearSVC**。两套数据分别训练，共形成四组主实验。分类器使用相同的训练集内分层验证策略、C 候选（0.1、1、10）和随机种子 42。BoVW 词典只用训练样本；验证中如调整 K 或分类器，必须在每个训练折学习词典和变换，再用于该折验证数据。最终测试集只用于最终评估。建议固定三折分层验证，按 Macro-F1 选参数。BoVW 可先固定 K=128，每张图最多保留 128 个 SIFT 描述子，并限制聚类样本量以控制运算成本。统一报告 Accuracy、Macro-F1、逐类指标和混淆矩阵，记录实际提取耗时及失败样本处理规则。
 
@@ -41,11 +42,15 @@ python code/setup_data.py "/存放两个课程数据压缩包的目录"
 
 ## 接口与交接
 
-- 数据清单建议按数据集分别保存。每行含 `sample_id,split,path,label`，其中 `sample_id` 在同一数据集唯一，`path` 相对 `code/data/raw/`，`split` 统一为 `train` 或 `test`。
+- 使用第 1 章交付的 `food101_split.csv` 和 `imagenette_split.csv`。每行含 `sample_id,split,path,label`，其中 `sample_id` 在同一数据集唯一，`path` 相对 `code/data/raw/`，`split` 统一为 `train` 或 `test`。
 - 特征保存时保留 `sample_id`。预测 CSV 使用 `sample_id,y_true,y_pred`，每个最终测试样本恰好一行。比较脚本按 ID 对齐并验证真实标签。
 - 实验脚本统一放在 `code/`，小体积实验产物放在 `code/results/`。每章结果记下运行命令、超参数、依赖版本、随机种子及测试样本数量。
 - 接力顺序按分工表执行。上一位合并后，下一位同步最新 `main`，提交自己的代码、实验结果和对应 Word 章节。共享 Word 一次由一人编辑。
 
+## 第 1 章核对结果
+
+共验证 19,394 张图像，全部能解码。两个数据集均无跨划分的重复样本 ID 或相同文件字节。Food-101 的一张训练图和一张测试图解码后像素相同，详情见 `code/results/data_audit/exact_cross_split_matches.csv`。两条分类路线统一保留课程原划分。
+
 ## 报告与提交
 
-`report/project2-report-template.docx` 是组内共享报告，按六章分工维护。每人同时按 `report/project2-personal-template.docx` 整理自己负责内容和必要的全组对比结果。Elearning 题面给出的文件名含学号、姓名和组号，按个人命名为 **Project2-学号-姓名-2-2.docx**，或按相同格式提交 PPT。组内在 12 月 1 日复核四组实验结果并准备 12 月 3 日汇报。
+组内维护一份汇总报告 `report/project2-report.docx`。各成员填写自己负责的章节，包含方法、所用函数的原理、关键代码、实测结果及分析。12 月 1 日复核四组实验结果。上传汇总 Word 时，按 Elearning 题面命名为 `Project2-学号-姓名-2-2.docx`，学号和姓名使用提交人信息。

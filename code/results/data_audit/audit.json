@@ -1,0 +1,22 @@
+{
+  "python": "3.12.14",
+  "opencv": "4.13.0",
+  "numpy": "2.3.5",
+  "matplotlib": "3.11.2",
+  "datasets": {
+    "food101": {
+      "decoded_images": 6000,
+      "missing_or_undecodable": 0,
+      "shared_sample_ids": 0,
+      "cross_split_file_sha256_groups": 0,
+      "cross_split_pixel_sha256_groups": 1
+    },
+    "imagenette": {
+      "decoded_images": 13394,
+      "missing_or_undecodable": 0,
+      "shared_sample_ids": 0,
+      "cross_split_file_sha256_groups": 0,
+      "cross_split_pixel_sha256_groups": 0
+    }
+  }
+}

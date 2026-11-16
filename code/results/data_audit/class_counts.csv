@@ -1,0 +1,17 @@
+dataset,label,train,test
+Food-101,sushi,750,250
+Food-101,tacos,750,250
+Food-101,takoyaki,750,250
+Food-101,tiramisu,750,250
+Food-101,tuna_tartare,750,250
+Food-101,waffles,750,250
+Imagenette,tench,963,387
+Imagenette,English springer,955,395
+Imagenette,cassette player,993,357
+Imagenette,chain saw,858,386
+Imagenette,church,941,409
+Imagenette,French horn,956,394
+Imagenette,garbage truck,961,389
+Imagenette,gas pump,931,419
+Imagenette,golf ball,951,399
+Imagenette,parachute,960,390

@@ -1,0 +1,5 @@
+dataset,split,images,short_min_px,short_p25_px,short_median_px,short_p75_px,short_max_px
+Food-101,train,4500,210,384.0,512.0,512.0,512
+Food-101,test,1500,271,384.0,512.0,512.0,512
+Imagenette,train,9469,320,320.0,320.0,320.0,320
+Imagenette,test,3925,320,320.0,320.0,320.0,320
