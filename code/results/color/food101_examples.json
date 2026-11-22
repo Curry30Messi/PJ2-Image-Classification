@@ -1,0 +1,32 @@
+[
+  {
+    "label": "sushi",
+    "sample_id": "sushi/100332",
+    "split": "train"
+  },
+  {
+    "label": "tacos",
+    "sample_id": "tacos/1002217",
+    "split": "train"
+  },
+  {
+    "label": "takoyaki",
+    "sample_id": "takoyaki/1002167",
+    "split": "train"
+  },
+  {
+    "label": "tiramisu",
+    "sample_id": "tiramisu/1002946",
+    "split": "train"
+  },
+  {
+    "label": "tuna_tartare",
+    "sample_id": "tuna_tartare/1010528",
+    "split": "train"
+  },
+  {
+    "label": "waffles",
+    "sample_id": "waffles/100242",
+    "split": "train"
+  }
+]
