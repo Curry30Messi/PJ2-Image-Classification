@@ -1,0 +1,52 @@
+[
+  {
+    "label": "tench",
+    "sample_id": "n01440764/ILSVRC2012_val_00000293.JPEG",
+    "split": "train"
+  },
+  {
+    "label": "English springer",
+    "sample_id": "n02102040/ILSVRC2012_val_00000665.JPEG",
+    "split": "train"
+  },
+  {
+    "label": "cassette player",
+    "sample_id": "n02979186/ILSVRC2012_val_00000557.JPEG",
+    "split": "train"
+  },
+  {
+    "label": "chain saw",
+    "sample_id": "n03000684/ILSVRC2012_val_00000537.JPEG",
+    "split": "train"
+  },
+  {
+    "label": "church",
+    "sample_id": "n03028079/ILSVRC2012_val_00004939.JPEG",
+    "split": "train"
+  },
+  {
+    "label": "French horn",
+    "sample_id": "n03394916/ILSVRC2012_val_00000957.JPEG",
+    "split": "train"
+  },
+  {
+    "label": "garbage truck",
+    "sample_id": "n03417042/ILSVRC2012_val_00001144.JPEG",
+    "split": "train"
+  },
+  {
+    "label": "gas pump",
+    "sample_id": "n03425413/ILSVRC2012_val_00002049.JPEG",
+    "split": "train"
+  },
+  {
+    "label": "golf ball",
+    "sample_id": "n03445777/ILSVRC2012_val_00002314.JPEG",
+    "split": "train"
+  },
+  {
+    "label": "parachute",
+    "sample_id": "n03888257/ILSVRC2012_val_00002508.JPEG",
+    "split": "train"
+  }
+]

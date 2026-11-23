@@ -1,0 +1,17 @@
+{
+  "python": "3.12.3",
+  "numpy": "2.4.4",
+  "opencv": "4.13.0",
+  "matplotlib": "3.11.0",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "processor": "Intel64 Family 6 Model 154 Stepping 3, GenuineIntel",
+  "opencv_threads": 1,
+  "seed": 42,
+  "randomness": "none",
+  "resize": "none",
+  "normalization": "L1",
+  "order": "H,S,V; C-order flatten",
+  "timing": "One pass; read/decode/HSV shared; histogram time separate; excludes cache writing and plots",
+  "failure_policy": "Raise with sample ID; never skip or insert zero features",
+  "configuration_policy": "Two fixed candidates; choose using training-only validation in chapter 3"
+}
