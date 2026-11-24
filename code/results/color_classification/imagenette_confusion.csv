@@ -1,0 +1,11 @@
+y_true,tench,English springer,cassette player,chain saw,church,French horn,garbage truck,gas pump,golf ball,parachute
+tench,240,20,18,3,9,25,22,4,36,10
+English springer,64,148,24,11,10,33,39,13,30,23
+cassette player,16,31,177,10,13,32,35,21,5,17
+chain saw,73,51,78,53,21,31,24,21,20,14
+church,15,25,22,13,125,69,25,9,25,81
+French horn,36,44,38,10,32,160,20,22,17,15
+garbage truck,30,24,51,12,16,10,166,22,15,43
+gas pump,34,35,61,21,20,49,70,91,14,24
+golf ball,48,30,33,15,23,32,36,14,124,44
+parachute,20,15,16,3,14,10,18,13,21,260

@@ -1,0 +1,118 @@
+{
+  "seed": 42,
+  "folds": 3,
+  "shuffle": true,
+  "C_candidates": [
+    0.1,
+    1.0,
+    10.0
+  ],
+  "bin_candidates": [
+    [
+      8,
+      8,
+      8
+    ],
+    [
+      16,
+      8,
+      8
+    ]
+  ],
+  "selection": "Largest mean validation Macro-F1; exact ties by dimension, then C.",
+  "preprocessing": "Chapter 2 per-image L1 histogram; no further transform.",
+  "macro_f1": "Unweighted mean of F1 over the fixed complete class list; zero_division=0.",
+  "confusion_orientation": "Rows are true classes; columns are predicted classes.",
+  "test_policy": "Only the selected model is evaluated on the official final test split.",
+  "timing": "CV fit sums; final fit and predict exclude feature extraction, IO and scoring.",
+  "python": "3.12.10",
+  "numpy": "2.3.5",
+  "scipy": "1.18.1",
+  "scikit_learn": "1.9.1",
+  "matplotlib": "3.11.2",
+  "platform": "Windows-11-10.0.26300-SP0",
+  "processor": "AMD64 Family 25 Model 97 Stepping 2, AuthenticAMD",
+  "numerical_threads": 1,
+  "datasets": {
+    "food101": {
+      "dataset": "food101",
+      "bins": "16x8x8",
+      "dimension": 1024,
+      "C": 10.0,
+      "train_samples": 4500,
+      "test_samples": 1500,
+      "cv_macro_f1": 0.3371780393086818,
+      "cv_std_macro_f1": 0.007812859050364721,
+      "accuracy": 0.36866666666666664,
+      "macro_f1": 0.3655063472868351,
+      "fit_seconds": 1.0648449000000255,
+      "predict_seconds": 0.005322199998772703,
+      "iterations": 12,
+      "labels": [
+        "sushi",
+        "tacos",
+        "takoyaki",
+        "tiramisu",
+        "tuna_tartare",
+        "waffles"
+      ],
+      "estimator_settings": {
+        "penalty": "l2",
+        "loss": "squared_hinge",
+        "dual": "auto",
+        "multi_class": "ovr",
+        "tol": 0.0001,
+        "max_iter": 10000,
+        "random_state": 42,
+        "fit_intercept": true,
+        "intercept_scaling": 1,
+        "class_weight": null
+      },
+      "manifest_sha256": "347df27ca5f0cd3e592990284cb621f68378b70c3983c8635dfc779d885cd43a",
+      "feature_file": "code/results/cache/color/food101_16x8x8.npz",
+      "feature_sha256": "2122abf986af28b5adb942fe9696ce7319b701da3af7868e673a41437ea7da92"
+    },
+    "imagenette": {
+      "dataset": "imagenette",
+      "bins": "16x8x8",
+      "dimension": 1024,
+      "C": 10.0,
+      "train_samples": 9469,
+      "test_samples": 3925,
+      "cv_macro_f1": 0.37156390988314875,
+      "cv_std_macro_f1": 0.009812746927551972,
+      "accuracy": 0.39337579617834395,
+      "macro_f1": 0.37919096527429685,
+      "fit_seconds": 7.209190800000215,
+      "predict_seconds": 0.015045399995869957,
+      "iterations": 18,
+      "labels": [
+        "tench",
+        "English springer",
+        "cassette player",
+        "chain saw",
+        "church",
+        "French horn",
+        "garbage truck",
+        "gas pump",
+        "golf ball",
+        "parachute"
+      ],
+      "estimator_settings": {
+        "penalty": "l2",
+        "loss": "squared_hinge",
+        "dual": "auto",
+        "multi_class": "ovr",
+        "tol": 0.0001,
+        "max_iter": 10000,
+        "random_state": 42,
+        "fit_intercept": true,
+        "intercept_scaling": 1,
+        "class_weight": null
+      },
+      "manifest_sha256": "5408442938fc0f8da00c3543ea4d295cdbc1e60fc56dd3c81eb620b1a000d51a",
+      "feature_file": "code/results/cache/color/imagenette_16x8x8.npz",
+      "feature_sha256": "7a573fd7f8214ca1b11d16689947369aa8e2d1a98d852272cb9a0d08b91c8117"
+    }
+  }
+}
