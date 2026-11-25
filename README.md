@@ -54,3 +54,49 @@ python code/prepare_splits.py
 ## 报告与提交
 
 组内维护一份汇总报告 `report/project2-report.docx`。各成员填写自己负责的章节，包含方法、所用函数的原理、关键代码、实测结果及分析。12 月 1 日复核四组实验结果。上传汇总 Word 时，按 Elearning 题面命名为 `Project2-学号-姓名-2-2.docx`，学号和姓名使用提交人信息。
+
+## 第 3 章复现与交接
+
+于智博的第 2 章已通过 PR #1 合并。竺钱成在两套数据上使用相同的三折分层验证规则，联合选择 HSV 分箱和 LinearSVC 的 C，再用全部训练样本拟合所选模型并评估官方测试集。
+
+已有原图时，在仓库根目录运行以下命令。全新环境先按前文安装依赖并解压课程包。
+
+```bash
+python code/extract_color.py
+python code/classify_color.py
+```
+
+已有与清单匹配的四份颜色缓存时，可以直接运行第二条命令。脚本从自身目录定位输入，支持在其他工作目录运行。缓存包含的清单 SHA-256、样本 ID、标签、划分、分箱、维数和 L1 归一化均会被核对。
+
+### 分类设置与结果
+
+两种分箱为 `8x8x8` 和 `16x8x8`，C 为 `0.1, 1, 10`。训练样本保持清单顺序，使用 `StratifiedKFold(n_splits=3, shuffle=True, random_state=42)`。每套数据的全部候选共用相同三折，以平均验证 Macro-F1 最大者胜出。完全相等时依次选择较低维数和较小 C。HSV 直方图沿用第 2 章的逐图 L1 归一化。
+
+LinearSVC 使用 L2 正则、平方 hinge 损失、one-vs-rest、`dual="auto"`、`tol=1e-4`、`max_iter=10000`、`random_state=42`、`fit_intercept=True`、`intercept_scaling=1`、`class_weight=None`。每套数据最终只评估训练验证选出的一个配置。发生不收敛时脚本报错，保留问题供处理。
+
+| 数据集 | 所选分箱与 C | 测试图数 | Accuracy | Macro-F1 |
+| --- | --- | --- | --- | --- |
+| Food-101 六类 | 16x8x8，C=10 | 1500 | 0.368667 | 0.365506 |
+| Imagenette | 16x8x8，C=10 | 3925 | 0.393376 | 0.379191 |
+
+所有小体积输出位于 `code/results/color_classification/`。
+
+- `summary.csv`、`config.json` 记录所选配置、验证与测试指标、实测分类耗时、软件版本及清单校验值。耗时排除特征提取、文件读写和指标计算。
+- `cv_search.csv` 记录每套数据六种候选的验证均值与标准差，标准差使用 `ddof=0`。`cv_folds.csv` 记录全部 36 次验证拟合，`{dataset}_folds.csv` 记录每个训练样本作为验证样本的折号。
+- `{dataset}_predictions.csv` 使用 `sample_id,y_true,y_pred`，分别覆盖全部 1500 和 3925 个测试样本。第 6 章可按 ID 与局部路线一对一对齐。
+- `{dataset}_per_class.csv` 包含逐类 precision、recall、F1 和 support。`{dataset}_confusion.csv` 为计数矩阵，行是真实类别，列是预测类别；同名 PNG 的颜色按行归一化，格内数字为计数。
+
+原图、特征缓存和 `code/results/cache/color_models/` 中的数值模型保留本地，通过脚本重建。后者保存权重、截距、类别顺序、分箱和 C，可直接核对线性决策分数。
+
+### 共用评分函数
+
+`code/evaluate.py` 提供 `score_predictions(y_true, y_pred, labels)`。`labels` 按第 1 章对应 `*_labels.csv` 的 `label_id` 排序后传入，使用完整的类别列表。Accuracy 为预测正确比例；每类 F1 为 `2PR/(P+R)`，Macro-F1 是全部类别 F1 的等权平均，零分母项记为 0。返回值包含总体指标、逐类表和按固定顺序排列的混淆矩阵。
+
+```python
+from evaluate import score_predictions
+
+scores = score_predictions(y_test, predictions, labels)
+print(scores["accuracy"], scores["macro_f1"])
+```
+
+张帅宇可按第 1 章原清单提取 SIFT。杨晓芳可复用 `classify_color.py` 的 `training_folds(y_train)`、`C_VALUES`、`SVC_SETTINGS` 和共用评分函数，使训练验证与分类器设置一致。BoVW 词典须在每折训练样本的描述子上拟合，再编码该折验证图像。正式分类器和词典最终用全量训练集拟合，测试集用于所选配置的最终评估。
